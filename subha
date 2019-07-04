@@ -1,0 +1,67 @@
+package testcases;
+
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+
+import pages.Apppage;
+import wdMethods.ProjectMethods;
+
+public class QE_CME_1142 extends ProjectMethods{
+	@BeforeTest
+	
+	public void setData() {
+		testCaseName="QE_CME_1142";
+		testDescription="To validate chart when Cost to Trade is compared with Bid Ask Spread when time period is 2 years under london";
+		testNodes="Leads";
+		category="Sanity";
+		authors="Subhajit";
+		browserName="chrome";
+		//dataSheetName="TC001";
+	}
+	@Parameters("browser")
+		public void setup(String browser) throws Exception{
+			//Check if parameter passed from TestNG is 'firefox'
+			if(browser.equalsIgnoreCase("firefox")){
+			//create firefox instance
+				System.setProperty("webdriver.firefox.marionette", ".\\geckodriver.exe");
+				driver = new FirefoxDriver();
+			}
+			//Check if parameter passed as 'chrome'
+			else if(browser.equalsIgnoreCase("chrome")){
+				//set path to chromedriver.exe
+				System.setProperty("webdriver.chrome.driver",".\\chromedriver.exe");
+				//create chrome instance
+				driver = new ChromeDriver();
+			}
+		}	
+	
+	
+	
+	@Test(enabled=true,priority=1)
+	public void chartValidate () throws Throwable{
+		
+		new Apppage()
+		.scrollDownLogin()
+		.clickLogIn()
+		.enterUserName(sName)
+		.enterPassword(sPass)
+		.clickLogIn()
+		//.scrollDown()
+		.SoyaProd()
+		.SoyaProdclick()
+		.calenderclick()
+		.yearclick()
+		.clickTimeZone()
+		.loTimeZone()
+		.cost_BAS()
+		.viewChart()
+		.lotNumber()
+		.gRAPH()
+		.val3BASaxis()
+		.valBottom1();
+		
+	}
+}
